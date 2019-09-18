@@ -1,0 +1,15 @@
+extends layout
+
+
+block styles
+  link(rel='stylesheet', href='/stylesheets/css/main.css')
+
+  
+block content
+  .content
+    main
+      h1= page_title
+      h2= sub_title
+  
+    footer
+      p: a(href='/address/') continue to app

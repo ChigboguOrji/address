@@ -1,0 +1,41 @@
+extends layout
+
+block styles
+  link(rel="stylesheet", href="/stylesheets/css/address.css")
+
+block content
+  include includes/_header.pug
+
+  main
+    .address-list
+      //- Handle error and infos
+      each error in errors
+        .flash-error
+          img(src="/images/info.jpg", alt="error")
+          p= error
+
+      each info in infos
+        .flash-info
+          img(src="/images/info.jpg", alt="info")
+          p= info
+
+      if contact.length > 0
+        ul
+          h1 People in your list
+          each address in contact
+            li
+              ul
+                li.name First Name : #{address.name}
+                li.name Last Name : #{address.lastname}
+                li.email Email : #{address.email}
+                li.cell_phone Phone : #{address.cell_phone}
+                li.home_phone Home phone : #{address.home_phone}
+                li.kin Next of Kin : #{address.kin}
+                .action
+                  a(href='/address/delete/'+address.id+'/') Delete
+                  a(href='/address/edit/'+address.id+'/') Edit
+      else
+        .unavailable-notice
+          h1 You have no address now! #[br]Please add some address to your address book
+          p: a(href='/address/add/') You can add one here
+        

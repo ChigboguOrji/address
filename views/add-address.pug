@@ -1,0 +1,54 @@
+extends layout
+
+block styles
+  link(rel="stylesheet", href="/stylesheets/css/address.css")
+
+block content
+  include includes/_header.pug
+
+  main
+    .address-list
+      each error in errors
+        .flash-error
+          img(src="/images/info.jpg", alt="error")
+          p= error
+
+      each info in infos
+        .flash-info
+          img(src="/images/info.jpg", alt="info")
+          p= info
+
+      .form-container
+        h1 Address book
+        h3.action-title= addrs ? 'Edit: ' + addrs.name : 'Add new address'
+        form(action="/address/"+operation+"/", method="post")
+          fieldset
+            legend Personal info
+            label(for="first_name") First Name
+              input(type="text",name="first_name",id="first_name", placeholder="First Name", value= addrs ? addrs.name : '')
+            
+            label(for="last_name") Last Name
+              input(type="text",name="last_name",id="last_name", placeholder="Last Name",value= addrs ? addrs.lastname : '')
+            
+          fieldset 
+            legend Contact info
+            label(for="email") Email
+              input(type="email",name="email",id="email", placeholder="Email",value= addrs ? addrs.email : "")  
+            
+            label(for="phone") Phone
+              input(type="text",name="phone",id="phone", placeholder="Phone",value= addrs ? addrs.phone : "")  
+
+            label(for="homephone") Home phone
+              input(type="text",name="homephone",id="homephone", placeholder="Home phone",value= addrs ? addrs.homephone : "") 
+
+          fieldset 
+            legend Other info
+            | Not required but, provides helpful information about contact
+            label(for="kin") Next of kin
+              input(type="text",name="kin",id="kin", placeholder="Next of kin",value= addrs ? addrs.kin : "")  
+            
+              input(type="submit",value= addrs ? "UPDATE" : "ADD TO LIST")  
+
+block bottom_scripts
+  append bottom_scripts
+    script(src="/javascripts/address-form.js")

@@ -1,0 +1,14 @@
+extends layout
+
+block styles
+  append styles
+    link(rel="stylesheet", href="/stylesheets/css/error.css")
+
+block content
+  .error
+    h1= error.status
+    h2= message
+    p It seems what you are looking for is not found, we really apologies #[br]as we work towards fixing that.
+
+    a(href='/', role='button', class='error-link-home') Home page
+    a(href='javascript:void(0)', role='button',class='error-link-back', onclick="window.history.go(-1)") Go back
