@@ -1,22 +1,18 @@
 @charset "UTF-8";
-
 body {
   background: #ad7000;
   color: #f2f2f2;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-
 .error {
   width: 50%;
   margin: 0 auto;
   text-align: center;
   margin-top: 150px;
 }
-
 .error h1 {
   font-size: 120px;
 }
-
 .error .error-link-home,
 .error .error-link-back {
   text-decoration: none;
@@ -28,19 +24,16 @@ body {
   border-radius: 3px;
   border: 1px solid #f2f2f2;
 }
-
 .error .error-link-home:hover,
 .error .error-link-back:hover {
   background-color: #4242ff;
 }
-
 .error .error-link-home {
   background-color: #f2f2f2;
   color: #3333ff;
   margin-right: 20px;
   font-weight: 700;
 }
-
 .error .error-link-home:hover {
   color: #f2f2f2;
 }

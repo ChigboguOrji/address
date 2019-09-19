@@ -21,7 +21,8 @@ exports.home = function (req, res, next) {
 exports.getAddPage = function (req, res, next) {
   res.render('add-address', {
     title: 'Add an address',
-    operation: 'add'
+    operation: 'add',
+    action_title: 'Add to address list'
   })
 }
 
@@ -43,17 +44,16 @@ exports.add_address = function (req, res, next) {
     if (err) return next(err);
     if (exist) {
       req.flash('error', 'Address already exist');
-      return res.redirect('/address/add/')
+      return res.redirect('/address/')
     }
 
     var contactAddr = new Address(addrObj);
-
     contactAddr.save(function (err, saved) {
       if (err) return next(err);
       if (saved) {
         req.flash('info', 'Address saved successfully');
         res.status(201);
-        res.redirect('/address/add/');
+        res.redirect('/address/');
       }
     })
   })
@@ -69,7 +69,7 @@ exports.deleteAddr = function (req, res, next) {
     if (addr) {
       addr.remove();
       req.flash('info', 'Address deleted');
-      res.redirect('/address/')
+      res.redirect('/address/add/')
     }
   })
 }
@@ -78,7 +78,6 @@ exports.deleteAddr = function (req, res, next) {
 
 exports.editAddr = function (req, res, next) {
   var id = req.params.id;
-
   Address.findOne({
     _id: id
   }, function (err, done) {
@@ -87,7 +86,8 @@ exports.editAddr = function (req, res, next) {
       res.render('add-address', {
         id: id,
         operation: 'edit',
-        addrs: done
+        addrs: done,
+        action_title: 'Edit the address'
       })
     }
   })
@@ -95,21 +95,21 @@ exports.editAddr = function (req, res, next) {
 
 exports.editMyAddr = function (req, res, next) {
   var newAdd = req.body;
-
-  Address.findOne({
-    name: newAdd.first_name,
-    email: newAdd.email
-  }, function (err, addrs) {
-    if (err) return next(err);
-    if (addrs) {
-      addrs.update(function (err, done) {
-        if (err) req.flash('error', 'Couldn\'t update address');
-        if (done) {
-          req.flash('info', 'Address updated successfully');
-          res.status(303);
-          res.redirect('/address/');
-        }
-      })
+  Address.update({
+    _id: newAdd.id
+  }, {
+    $set: newAdd
+  }, {
+    safe: true,
+    multi: false
+  }, function (err, done) {
+    if (err) {
+      req.flash('error', 'Couldn\'t update address');
+      next(err);
+    }
+    if (done) {
+      req.flash('info', 'Address updated successfully');
+      res.redirect('/address/');
     }
   })
 }

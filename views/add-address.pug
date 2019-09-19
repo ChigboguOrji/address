@@ -15,12 +15,10 @@ block content
 
       each info in infos
         .flash-info
-          img(src="/images/info.jpg", alt="info")
           p= info
 
       .form-container
-        h1 Address book
-        h3.action-title= addrs ? 'Edit: ' + addrs.name : 'Add new address'
+        h1= action_title
         form(action="/address/"+operation+"/", method="post")
           fieldset
             legend Personal info
@@ -47,7 +45,10 @@ block content
             label(for="kin") Next of kin
               input(type="text",name="kin",id="kin", placeholder="Next of kin",value= addrs ? addrs.kin : "")  
             
-              input(type="submit",value= addrs ? "UPDATE" : "ADD TO LIST")  
+            if addrs
+              input(type="hidden",name="id",id="id", value= addrs.id)
+            
+            input(type="submit",value= addrs ? "UPDATE" : "ADD TO LIST")  
 
 block bottom_scripts
   append bottom_scripts

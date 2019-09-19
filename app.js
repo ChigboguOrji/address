@@ -42,7 +42,7 @@ app.set('view engine', 'pug');
 // custom app variables
 app.locals.appName = 'Address book';
 
-app.use(logger('dev'));
+app.use(logger('short'));
 app.use(express.json());
 app.use(express.urlencoded({
   extended: false

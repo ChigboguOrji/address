@@ -5,10 +5,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
   transition: all, 0.3s linear;
+  background: url(../../images/logo.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 header.app {
-  background-color: #ad7000;
-  border-bottom: 2px solid #946000;
+  background-color: rgba(51, 51, 255, 0.9);
+  border-bottom: 2px solid #d68b00;
   color: #f2f2f2;
 }
 header.app > .wrap {
@@ -34,12 +38,12 @@ header.app > .wrap ul > li:not(:last-of-type) {
 }
 header.app > .wrap ul > li a {
   text-decoration: none;
-  color: #ad7000;
+  color: #808080;
   padding: 5px 10px;
   border-radius: 3px;
   border: 1px solid #f2f2f2;
   background-color: #fff;
-  font-weight: 700;
+  font-weight: 600;
 }
 header.app > .wrap ul > li a:hover {
   background-color: #f2f2f2;
@@ -52,21 +56,20 @@ main {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 main .address-list {
-  width: 90%;
+  width: 70%;
   margin: 0 auto;
   padding-bottom: 30px;
 }
 main .address-list > .flash-error,
 main .address-list > .flash-info {
   color: #000;
-  padding: 5px;
   text-align: center;
   font-weight: 700;
-}
-main .address-list > .flash-error img,
-main .address-list > .flash-info img {
-  width: 100px;
-  height: 100px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #d68b00;
 }
 main .address-list .unavailable-notice {
   width: 50%;
@@ -84,6 +87,7 @@ main .address-list .unavailable-notice p > a {
 main .address-list > ul {
   margin: 0;
   padding: 0;
+  margin-bottom: 50px;
 }
 main .address-list > ul > li {
   list-style: none;
@@ -91,12 +95,12 @@ main .address-list > ul > li {
   border-radius: 3px;
   margin-top: 20px;
   padding: 20px;
-  background-color: #f2f2f2;
+  background-color: rgba(242, 242, 242, 0.7);
 }
 main .address-list > ul > li > ul {
   margin: 0;
   padding: 0;
-  font-weight: 800;
+  font-weight: 600;
 }
 main .address-list > ul > li > ul > li {
   list-style: none;
@@ -113,15 +117,8 @@ main .address-list > ul > li > ul .action a:hover {
   text-decoration: underline;
 }
 main .address-list > .form-container {
-  border-radius: 3px;
   width: 70%;
-  margin: 20px auto;
-}
-main .address-list > .form-container .action-title {
-  color: #3333ff;
-  background-color: #f2f2f2;
-  padding: 10px;
-  border-radius: 3px;
+  margin: 10px auto 50px;
 }
 main .address-list > .form-container > form {
   -webkit-box-sizing: border-box;
@@ -140,7 +137,7 @@ main .address-list > .form-container > form fieldset label {
   display: block;
 }
 main .address-list > .form-container > form fieldset label {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 main .address-list > .form-container > form fieldset input {
   display: block;
