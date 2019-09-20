@@ -10,17 +10,17 @@ router.use(function (req, res, next) {
 });
 
 
-router.get('/', address_controller.home);
+router.get('/', address_controller.allContacts);
 
 
-router.get('/add/', address_controller.getAddPage);
+router.get('/add/', address_controller.addContactGet);
 
-router.post('/add/', address_controller.add_address);
+router.post('/add/', address_controller.addContactPost);
 
-router.get('/delete/:id', address_controller.deleteAddr);
+router.get('/delete/:id', address_controller.deleteContactPost);
 
-router.get('/edit/:id', address_controller.editAddr);
+router.get('/edit/:id', address_controller.editContactGet);
 
-router.post('/edit/', address_controller.editMyAddr);
+router.post('/edit/', address_controller.editContactPost);
 
 module.exports = router;

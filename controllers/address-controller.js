@@ -4,7 +4,7 @@
  */
 var Address = require('../models/address-model');
 
-exports.home = function (req, res, next) {
+exports.allContacts = function (req, res, next) {
   Address.find().sort({
     added: -1
   }).exec(function (err, done) {
@@ -18,7 +18,7 @@ exports.home = function (req, res, next) {
   });
 }
 
-exports.getAddPage = function (req, res, next) {
+exports.addContactGet = function (req, res, next) {
   res.render('add-address', {
     title: 'Add an address',
     operation: 'add',
@@ -27,13 +27,13 @@ exports.getAddPage = function (req, res, next) {
 }
 
 
-exports.add_address = function (req, res, next) {
+exports.addContactPost = function (req, res, next) {
   var addrObj = {
     name: req.body.first_name,
     lastname: req.body.last_name,
     email: req.body.email,
     phone: req.body.phone,
-    homephone: req.body.homephone,
+    allContactsphone: req.body.allContactsphone,
     kin: req.body.kin
   };
 
@@ -60,7 +60,7 @@ exports.add_address = function (req, res, next) {
 }
 
 
-exports.deleteAddr = function (req, res, next) {
+exports.deleteContactPost = function (req, res, next) {
   var id = req.params.id
   Address.findOne({
     _id: id
@@ -76,7 +76,7 @@ exports.deleteAddr = function (req, res, next) {
 
 
 
-exports.editAddr = function (req, res, next) {
+exports.editContactGet = function (req, res, next) {
   var id = req.params.id;
   Address.findOne({
     _id: id
@@ -93,7 +93,7 @@ exports.editAddr = function (req, res, next) {
   })
 }
 
-exports.editMyAddr = function (req, res, next) {
+exports.editContactPost = function (req, res, next) {
   var newAdd = req.body;
   Address.update({
     _id: newAdd.id
