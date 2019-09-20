@@ -12,7 +12,6 @@ router.use(function (req, res, next) {
 
 router.get('/', address_controller.allContacts);
 
-
 router.get('/add/', address_controller.addContactGet);
 
 router.post('/add/', address_controller.addContactPost);

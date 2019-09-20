@@ -33,7 +33,7 @@ exports.addContactPost = function (req, res, next) {
     lastname: req.body.last_name,
     email: req.body.email,
     phone: req.body.phone,
-    allContactsphone: req.body.allContactsphone,
+    homephone: req.body.allContactsphone,
     kin: req.body.kin
   };
 
@@ -69,7 +69,7 @@ exports.deleteContactPost = function (req, res, next) {
     if (addr) {
       addr.remove();
       req.flash('info', 'Address deleted');
-      res.redirect('/address/add/')
+      res.redirect('/address/')
     }
   })
 }
@@ -93,23 +93,32 @@ exports.editContactGet = function (req, res, next) {
   })
 }
 
+
 exports.editContactPost = function (req, res, next) {
-  var newAdd = req.body;
-  Address.update({
-    _id: newAdd.id
-  }, {
-    $set: newAdd
-  }, {
-    safe: true,
-    multi: false
+  var editted = {
+    name: req.body.first_name,
+    lastname: req.body.last_name,
+    email: req.body.email,
+    phone: req.body.phone,
+    homephone: req.body.homephone,
+    kin: req.body.kin,
+    id: req.body.id
+  };
+
+  Address.findOne({
+    _id: editted.id
   }, function (err, done) {
-    if (err) {
-      req.flash('error', 'Couldn\'t update address');
-      next(err);
-    }
+    if (err) next(err);
     if (done) {
-      req.flash('info', 'Address updated successfully');
-      res.redirect('/address/');
+      Address.update({
+        _id: editted.id
+      }, editted, function (err, done) {
+        if (err) return next(err);
+        if (done) {
+          req.flash('info', 'Updated');
+          res.redirect(302, '/address/');
+        }
+      })
     }
   })
 }
