@@ -8,15 +8,6 @@ block content
 
   main
     .address-list
-      //- Handle error and infos
-      each error in errors
-        .flash-error
-          img(src="/images/info.jpg", alt="error")
-          p= error
-
-      each info in infos
-        .flash-info
-          p= info
 
       if contact.length > 0
         ul
@@ -27,8 +18,8 @@ block content
                 li.name First Name : #{address.name}
                 li.name Last Name : #{address.lastname}
                 li.email Email : #{address.email}
-                li.cell_phone Phone : #{address.cell_phone}
-                li.home_phone Home phone : #{address.home_phone}
+                li.cell_phone Phone : #{address.phone}
+                li.home_phone Home phone : #{address.homephone}
                 li.kin Next of Kin : #{address.kin}
                 .action
                   a(href='/address/delete/'+address.id+'/') Delete
@@ -37,4 +28,17 @@ block content
         .unavailable-notice
           h1 You have no address now! #[br]Please add some address to your address book
           p: a(href='/address/add/') You can add one here
+          
+      .infoMsg
+        each error in errors
+          p= error
+
+        each info in infos
+          p= info
+
+        unless contact.length
+          small &#169; 2019 || brightside
         
+block bottom_scripts
+  append bottom_scripts
+    script(src="/javascripts/effects.js")

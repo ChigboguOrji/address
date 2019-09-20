@@ -8,15 +8,6 @@ block content
 
   main
     .address-list
-      each error in errors
-        .flash-error
-          img(src="/images/info.jpg", alt="error")
-          p= error
-
-      each info in infos
-        .flash-info
-          p= info
-
       .form-container
         h1= action_title
         form(action="/address/"+operation+"/", method="post")
@@ -48,8 +39,16 @@ block content
             if addrs
               input(type="hidden",name="id",id="id", value= addrs.id)
             
-            input(type="submit",value= addrs ? "UPDATE" : "ADD TO LIST")  
+            input(type="submit",value= addrs ? "UPDATE" : "ADD TO LIST") 
+            
+      .infoMsg
+        each error in errors
+          p= error
+
+        each info in infos
+          p= info
 
 block bottom_scripts
   append bottom_scripts
     script(src="/javascripts/address-form.js")
+    script(src="/javascripts/effects.js")
